@@ -2,6 +2,7 @@ package com.x.popularpeople.ui.person_details
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -46,7 +47,7 @@ class PersonDetailsActivity : AppCompatActivity() {
     }
 
     private fun bindUI(it: PersonDetails) {
-
+        Log.d("BindUI","Arrived");
         name.text = it.name
 
         val personPosterURL: String = POSTER_BASE_URL + it.profilePath

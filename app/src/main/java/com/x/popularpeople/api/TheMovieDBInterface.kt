@@ -12,6 +12,6 @@ interface TheMovieDBInterface {
     // https://api.themoviedb.org/3/
 
     @GET("person/{person_id}")
-    fun getPersonDetails(@Path("movie_id") id: Int): Single<PersonDetails>
+    fun getPersonDetails(@Path("person_id") id: Int): Single<PersonDetails>
 
 }
