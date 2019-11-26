@@ -26,7 +26,7 @@
             android:text="@string/connection_problem"
             android:visibility="gone" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -107,7 +107,7 @@
                     android:scrollbars="vertical" />
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
