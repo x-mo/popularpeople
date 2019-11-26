@@ -27,7 +27,7 @@ class PersonDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person_details)
 
-        val personId: Int = 1892
+        val personId: Int = intent.getIntExtra("id",1)
 
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
         personDetailsRepository = PersonDetailsRepository(apiService)
@@ -54,7 +54,7 @@ class PersonDetailsActivity : AppCompatActivity() {
         Glide.with(this)
             .load(personPosterURL)
             .into(iv_profile_image)
-//        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
 
     }
 

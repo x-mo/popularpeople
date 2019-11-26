@@ -22,7 +22,7 @@ data class PersonDetails(
     val profilePath: String
 
 )
-
-//{override fun toString(): String =
-//    "$id $name $placeOfBirth $birthday $gender $knownForDepartment $biography $profilePath"
-//}
+{
+    override fun toString(): String =
+        "$id $name $placeOfBirth $birthday $gender $knownForDepartment $biography $profilePath"
+}
