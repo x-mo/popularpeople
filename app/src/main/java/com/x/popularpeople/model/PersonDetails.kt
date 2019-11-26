@@ -20,4 +20,9 @@ data class PersonDetails(
     val placeOfBirth: String,
     @SerializedName("profile_path")
     val profilePath: String
+
 )
+
+//{override fun toString(): String =
+//    "$id $name $placeOfBirth $birthday $gender $knownForDepartment $biography $profilePath"
+//}
