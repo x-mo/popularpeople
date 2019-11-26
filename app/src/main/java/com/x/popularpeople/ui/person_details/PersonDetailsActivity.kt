@@ -57,7 +57,7 @@ class PersonDetailsActivity : AppCompatActivity() {
         gender.text = if (it.gender == 2) "Male" else "Female"
 
 
-        val personPosterURL: String = ORIGINAL_POSTER_BASE_URL + it.profilePath
+        val personPosterURL: String = POSTER_BASE_URL + it.profilePath
         Glide.with(this)
             .load(personPosterURL)
             .into(iv_profile_image)

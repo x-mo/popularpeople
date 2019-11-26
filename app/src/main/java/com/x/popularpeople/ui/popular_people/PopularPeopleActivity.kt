@@ -39,8 +39,8 @@ class PopularPeopleActivity : AppCompatActivity() {
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 val viewType: Int = peopleAdapter.getItemViewType(position)
-                if (viewType == peopleAdapter.PEOPLE_VIEW_TYPE) return 1
-                else return 2
+                return if (viewType == peopleAdapter.PEOPLE_VIEW_TYPE) 1
+                else 2
             }
         }
 
