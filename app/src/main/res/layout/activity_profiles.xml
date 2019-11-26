@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.profiles.ProfilesActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_profiles"
+    <ImageView
+        android:id="@+id/profile_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent" />
 
+    <Button
+        android:id="@+id/save_to_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_to_device"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

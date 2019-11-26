@@ -58,8 +58,8 @@ class ProfilesListAdapter(private val context: Context) :
             Glide.with(itemView.context).load(profileURL).into(itemView.cv_iv_person_profile)
 
             itemView.setOnClickListener {
-                val intent = Intent(context, PersonDetailsActivity::class.java)
-                intent.putExtra("url", profile?.filePath)
+                val intent = Intent(context, ProfilesActivity::class.java)
+                intent.putExtra("path", profile?.filePath)
                 context.startActivity(intent)
             }
         }

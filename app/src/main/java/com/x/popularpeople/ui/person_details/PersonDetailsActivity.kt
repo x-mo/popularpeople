@@ -1,9 +1,9 @@
 package com.x.popularpeople.ui.person_details
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -20,8 +20,6 @@ import com.x.popularpeople.ui.profiles.ProfilesListAdapter
 import com.x.popularpeople.ui.profiles.ProfilesListRepository
 import com.x.popularpeople.ui.profiles.ProfilesViewModel
 import kotlinx.android.synthetic.main.activity_person_details.*
-import kotlinx.android.synthetic.main.activity_person_details.rv_profiles
-import kotlinx.android.synthetic.main.activity_profiles.*
 
 class PersonDetailsActivity : AppCompatActivity() {
 
@@ -62,8 +60,6 @@ class PersonDetailsActivity : AppCompatActivity() {
         profilesViewModel.profilesList.observe(this, Observer {
             profilesAdapter.submitList(it.profiles)
 
-            Log.d("RV", "Bound" + it.profiles[0].filePath)
-
         })
 
         setupRV()
@@ -80,7 +76,6 @@ class PersonDetailsActivity : AppCompatActivity() {
     }
 
     private fun bindUI(it: PersonDetails) {
-        Log.d("BindUI", "Arrived");
         name.text = it.name
         known_for.text = it.knownForDepartment
         birth_day.text = it.birthday
@@ -93,7 +88,6 @@ class PersonDetailsActivity : AppCompatActivity() {
         Glide.with(this)
             .load(personPosterURL)
             .into(iv_profile_image)
-//        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
 
     }
 
