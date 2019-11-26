@@ -101,7 +101,6 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_profiles"
-                    android:background="#000"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"

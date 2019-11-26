@@ -19,7 +19,7 @@ import com.x.popularpeople.ui.person_details.PersonDetailsActivity
 import kotlinx.android.synthetic.main.network_state_item.view.*
 import kotlinx.android.synthetic.main.people_item.view.*
 
-class ProfilesListAdapter(public val context: Context) :
+class ProfilesListAdapter(private val context: Context) :
     ListAdapter<Profile, RecyclerView.ViewHolder>(ProfileDiffCallback()) {
 
 

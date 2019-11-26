@@ -3,26 +3,22 @@ package com.x.popularpeople.ui.profiles
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.GridLayoutManager
 import com.x.popularpeople.R
-import com.x.popularpeople.api.POSTER_BASE_URL
 import com.x.popularpeople.api.TheMovieDBClient
 import com.x.popularpeople.api.TheMovieDBInterface
-import com.x.popularpeople.model.PersonDetails
 import com.x.popularpeople.model.Profiles
-import com.x.popularpeople.repository.NetworkState
-import com.x.popularpeople.ui.person_details.PersonDetailsRepository
-import com.x.popularpeople.ui.person_details.PersonDetailsViewModel
-import kotlinx.android.synthetic.main.activity_person_details.*
+import com.x.popularpeople.ui.popular_people.PopularPeoplePagedListAdapter
+import kotlinx.android.synthetic.main.activity_popular_people.*
+import kotlinx.android.synthetic.main.activity_profiles.*
 
 class ProfilesActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: ProfilesViewModel
+    private lateinit var profilesViewModel: ProfilesViewModel
     private lateinit var profilesListRepository: ProfilesListRepository
 
 
@@ -36,20 +32,36 @@ class ProfilesActivity : AppCompatActivity() {
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
         profilesListRepository = ProfilesListRepository(apiService)
 
-        viewModel = getViewModel(personId)
+        profilesViewModel = getViewModel(personId)
 
-        viewModel.profilesList.observe(this, Observer {
+        profilesViewModel.profilesList.observe(this, Observer {
             bindUI(it)
 
         })
 
-//        viewModel.networkState.observe(this, Observer {
-//            progress_bar.visibility = if (it == NetworkState.LOADING) View.VISIBLE else View.GONE
-//            txt_error.visibility = if (it == NetworkState.ERROR) View.VISIBLE else View.GONE
-//
-//        })
+
+        setupRV()
 
 
+    }
+
+    val profilesAdapter = ProfilesListAdapter(this)
+    fun setupRV(){
+
+
+        val gridLayoutManager = GridLayoutManager(this, 4)
+
+//        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+//            override fun getSpanSize(position: Int): Int {
+//                val viewType: Int = profilesAdapter.getItemViewType(position)
+//                return if (viewType == profilesAdapter.PEOPLE_VIEW_TYPE) 1
+//                else 2
+//            }
+//        }
+
+        rv_profiles.layoutManager = gridLayoutManager
+        rv_profiles.setHasFixedSize(true)
+        rv_profiles.adapter = profilesAdapter
     }
 
 
@@ -59,14 +71,7 @@ class ProfilesActivity : AppCompatActivity() {
         Log.d("BindUI", it.profiles[1].filePath)
         Log.d("BindUI", it.profiles[2].filePath)
 
-
-//        name.text = it.name
-//        known_for.text = it.knownForDepartment
-//        birth_day.text = it.birthday
-//        birth_place.text = it.placeOfBirth
-//        biography.text = it.biography
-//        gender.text = if (it.gender == 2) "Male" else "Female"
-
+        profilesAdapter.submitList(it.profiles)
 
 //        val personPosterURL: String = POSTER_BASE_URL + it.profilePath
 //        Glide.with(this)
