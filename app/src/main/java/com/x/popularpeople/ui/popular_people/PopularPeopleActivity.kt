@@ -13,11 +13,6 @@ class PopularPeopleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_popular_people)
 
-//        hello_world.setOnClickListener {
-//            val intent = Intent(this, PersonDetailsActivity::class.java)
-//            intent.putExtra("id", 2)
-//            this.startActivity(intent)
-//        }
 
     }
 }
