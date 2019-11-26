@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PopularPeople</string>
+    <string name="person_image_desc">Person\'s Profile Image</string>
+    <string name="connection_problem">Connection Problem</string>
 </resources>
