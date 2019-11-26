@@ -82,6 +82,7 @@ class PopularPeoplePagedListAdapter(public val context: Context) :
     class PeopleItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(people: People?, context: Context) {
             itemView.cv_person_name.text = people?.name
+            itemView.cv_person_role.text = people?.knownForDepartment
 
             val peopleProfileURL: String = POSTER_BASE_URL + people?.profilePath
             Glide.with(itemView.context).load(peopleProfileURL).into(itemView.cv_iv_person_profile)

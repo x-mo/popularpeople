@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.x.popularpeople.R
+import com.x.popularpeople.api.ORIGINAL_POSTER_BASE_URL
 import com.x.popularpeople.api.POSTER_BASE_URL
 import com.x.popularpeople.api.TheMovieDBClient
 import com.x.popularpeople.api.TheMovieDBInterface
@@ -27,7 +28,7 @@ class PersonDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person_details)
 
-        val personId: Int = intent.getIntExtra("id",1)
+        val personId: Int = intent.getIntExtra("id", 1)
 
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
         personDetailsRepository = PersonDetailsRepository(apiService)
@@ -47,14 +48,20 @@ class PersonDetailsActivity : AppCompatActivity() {
     }
 
     private fun bindUI(it: PersonDetails) {
-        Log.d("BindUI","Arrived");
+        Log.d("BindUI", "Arrived");
         name.text = it.name
+        known_for.text = it.knownForDepartment
+        birth_day.text = it.birthday
+        birth_place.text = it.placeOfBirth
+        biography.text = it.biography
+        gender.text = if (it.gender == 2) "Male" else "Female"
 
-        val personPosterURL: String = POSTER_BASE_URL + it.profilePath
+
+        val personPosterURL: String = ORIGINAL_POSTER_BASE_URL + it.profilePath
         Glide.with(this)
             .load(personPosterURL)
             .into(iv_profile_image)
-        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
 
     }
 

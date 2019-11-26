@@ -34,17 +34,16 @@
             android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="12sp" />
+            android:textStyle="bold"
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/cv_movie_release_date"
+            android:id="@+id/cv_person_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
-            android:maxLength="4"
-            android:text="2019"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
