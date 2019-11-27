@@ -3,6 +3,7 @@ package com.x.popularpeople.ui.person_details
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -85,10 +86,14 @@ class PersonDetailsActivity : AppCompatActivity() {
 
 
         val personPosterURL: String = POSTER_BASE_URL + it.profilePath
-        Glide.with(this)
-            .load(personPosterURL)
-            .into(iv_profile_image)
-
+        if (it.profilePath != null)
+            Glide.with(this)
+                .load(personPosterURL)
+                .into(iv_profile_image)
+        else {
+            iv_profile_image.setImageResource(R.drawable.person_placeholder)
+            iv_profile_image.scaleType = ImageView.ScaleType.FIT_XY
+        }
     }
 
     private fun getPersonViewModel(personId: Int): PersonDetailsViewModel {

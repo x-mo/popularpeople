@@ -2,6 +2,7 @@ package com.x.popularpeople.ui.popular_people
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,8 +86,10 @@ class PopularPeoplePagedListAdapter(public val context: Context) :
             itemView.cv_person_role.text = people?.knownForDepartment
 
             val peopleProfileURL: String = POSTER_BASE_URL + people?.profilePath
-            Glide.with(itemView.context).load(peopleProfileURL).into(itemView.cv_iv_person_profile)
-
+            if (people?.profilePath != null)
+                Glide.with(itemView.context).load(peopleProfileURL).into(itemView.cv_iv_person_profile)
+            else
+                itemView.cv_iv_person_profile.setImageResource(R.drawable.person_placeholder)
             itemView.setOnClickListener {
                 val intent = Intent(context, PersonDetailsActivity::class.java)
                 intent.putExtra("id", people?.id)

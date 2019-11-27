@@ -55,7 +55,10 @@ class ProfilesListAdapter(private val context: Context) :
         fun bind(profile: Profile?, context: Context) {
 
             val profileURL: String = POSTER_BASE_URL + profile?.filePath
-            Glide.with(itemView.context).load(profileURL).into(itemView.cv_iv_person_profile)
+            if (profile?.filePath != null)
+                Glide.with(itemView.context).load(profileURL).into(itemView.cv_iv_person_profile)
+            else
+                itemView.cv_iv_person_profile.setImageResource(R.drawable.person_placeholder)
 
             itemView.setOnClickListener {
                 val intent = Intent(context, ProfilesActivity::class.java)
