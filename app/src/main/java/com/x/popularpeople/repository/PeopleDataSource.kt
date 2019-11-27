@@ -6,7 +6,6 @@ import androidx.paging.PageKeyedDataSource
 import com.x.popularpeople.api.FIRST_PAGE
 import com.x.popularpeople.api.TheMovieDBInterface
 import com.x.popularpeople.model.People
-import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 

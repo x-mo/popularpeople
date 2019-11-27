@@ -30,24 +30,4 @@ class ProfilesListRepository(private val apiService: TheMovieDBInterface) {
 
     }
 
-//    fun getNetworkState(): LiveData<NetworkState> {
-//        return Transformations.switchMap<ProfilesDataSource, NetworkState>(
-//            profilesDataSource.downloadedProfilesResponse,
-//            ProfilesDataSource::networkState)
-//    }
-
-
-//    fun getNetworkState(): LiveData<NetworkState> {
-//        return Transformations.switchMap<PeopleDataSource, NetworkState>(
-//            peopleDataSourceFactory.peopleLiveDataSource,
-//            PeopleDataSource::networkState)
-//    }
-
-
-//    fun getNetworkState(): LiveData<NetworkState> {
-//        return Transformations.switchMap<ProfilesDataSource, NetworkState>(
-//            profilesDataSource.downloadedProfilesResponse,
-//            ProfilesDataSource::networkState)
-//    }
-
 }

@@ -1,6 +1,5 @@
 package com.x.popularpeople.ui.popular_people
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -71,18 +70,15 @@ class PopularPeopleActivity : AppCompatActivity() {
         })
 
         search.setOnClickListener {
-            showAddItemDialog()
-//            val intent = Intent(this, PopularPeopleActivity::class.java)
-//            intent.putExtra("query", "Sung")
-//            startActivity(intent)
+            showSearchDialog()
         }
 
     }
 
-    private fun showAddItemDialog() {
+    private fun showSearchDialog() {
         val editText = EditText(this)
         val dialog: AlertDialog = AlertDialog.Builder(this)
-            .setTitle("Enter person's name")
+            .setTitle("Enter person name")
             .setView(editText)
             .setPositiveButton(
                 "Search"

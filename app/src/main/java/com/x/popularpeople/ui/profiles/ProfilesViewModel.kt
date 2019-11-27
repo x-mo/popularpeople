@@ -19,14 +19,6 @@ class ProfilesViewModel (private val profilesListRepository: ProfilesListReposit
         profilesListRepository.fetchProfiles(compositeDisposable,personId)
     }
 
-//    val networkState: LiveData<NetworkState> by lazy {
-//        peopleRepository.getNetworkState()
-//    }
-
-//    fun listIsEmpty(): Boolean {
-//        return peoplePagedList.value?.isEmpty() ?: true
-//    }
-
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
