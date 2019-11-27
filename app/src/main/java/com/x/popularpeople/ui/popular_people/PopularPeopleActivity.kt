@@ -1,8 +1,11 @@
 package com.x.popularpeople.ui.popular_people
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -13,8 +16,8 @@ import com.x.popularpeople.R
 import com.x.popularpeople.api.TheMovieDBClient
 import com.x.popularpeople.api.TheMovieDBInterface
 import com.x.popularpeople.repository.NetworkState
-import com.x.popularpeople.ui.person_details.PersonDetailsActivity
 import kotlinx.android.synthetic.main.activity_popular_people.*
+
 
 class PopularPeopleActivity : AppCompatActivity() {
 
@@ -33,7 +36,7 @@ class PopularPeopleActivity : AppCompatActivity() {
         var searchQuery =
             if (intent.getStringExtra("query") == null) ""
             else intent.getStringExtra("query")
-        
+
         viewModel = getViewModel(searchQuery)
 
         val peopleAdapter = PopularPeoplePagedListAdapter(this)
@@ -67,13 +70,32 @@ class PopularPeopleActivity : AppCompatActivity() {
             }
         })
 
-        butt.setOnClickListener {
-            val intent = Intent(this, PopularPeopleActivity::class.java)
-            intent.putExtra("query", "Sung")
-            startActivity(intent)
+        search.setOnClickListener {
+            showAddItemDialog()
+//            val intent = Intent(this, PopularPeopleActivity::class.java)
+//            intent.putExtra("query", "Sung")
+//            startActivity(intent)
         }
 
     }
+
+    private fun showAddItemDialog() {
+        val editText = EditText(this)
+        val dialog: AlertDialog = AlertDialog.Builder(this)
+            .setTitle("Enter person's name")
+            .setView(editText)
+            .setPositiveButton(
+                "Search"
+            ) { _, _ ->
+                val query = editText.text.toString()
+                val intent = Intent(this, PopularPeopleActivity::class.java)
+                intent.putExtra("query", query)
+                startActivity(intent)
+            }
+            .create()
+        dialog.show()
+    }
+
 
     private fun getViewModel(query: String): PopularPeopleViewModel {
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
