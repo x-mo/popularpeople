@@ -8,24 +8,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.x.popularpeople.R
 import com.x.popularpeople.api.ORIGINAL_POSTER_BASE_URL
-import com.x.popularpeople.api.TheMovieDBClient
-import com.x.popularpeople.api.TheMovieDBInterface
-import com.x.popularpeople.model.Profiles
-import com.x.popularpeople.ui.popular_people.PopularPeoplePagedListAdapter
-import kotlinx.android.synthetic.main.activity_popular_people.*
 import kotlinx.android.synthetic.main.activity_profiles.*
 
 class ProfilesActivity : AppCompatActivity() {

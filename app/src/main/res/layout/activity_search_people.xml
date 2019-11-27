@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.popular_people.PopularPeopleActivity">
+    tools:context=".ui.search_people.SearchPeopleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,16 +26,6 @@
             android:text="@string/connection_problem"
             android:visibility="gone" />
 
-        <Button
-            android:id="@+id/butt"
-            android:text="clear list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/butt2"
-            android:text="reload list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"

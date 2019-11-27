@@ -17,6 +17,10 @@ class PopularPeopleViewModel(private val peopleRepository: PeoplePagedListReposi
         peopleRepository.fetchLivePeoplePagedList(compositeDisposable)
     }
 
+    val searchPeoplePagedList: LiveData<PagedList<People>> by lazy {
+        peopleRepository.searchLivePeoplePagedList(compositeDisposable)
+    }
+
     val networkState: LiveData<NetworkState> by lazy {
         peopleRepository.getNetworkState()
     }

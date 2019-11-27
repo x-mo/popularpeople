@@ -1,9 +1,8 @@
 package com.x.popularpeople.ui.popular_people
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +12,6 @@ import com.x.popularpeople.R
 import com.x.popularpeople.api.TheMovieDBClient
 import com.x.popularpeople.api.TheMovieDBInterface
 import com.x.popularpeople.repository.NetworkState
-import com.x.popularpeople.ui.person_details.PersonDetailsActivity
 import kotlinx.android.synthetic.main.activity_popular_people.*
 
 class PopularPeopleActivity : AppCompatActivity() {
@@ -28,7 +26,7 @@ class PopularPeopleActivity : AppCompatActivity() {
 
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
 
-        peopleRepository = PeoplePagedListRepository(apiService)
+        peopleRepository = PeoplePagedListRepository(apiService,"robert")
 
         viewModel = getViewModel()
 
@@ -62,7 +60,6 @@ class PopularPeopleActivity : AppCompatActivity() {
                 peopleAdapter.setNetworkState(it)
             }
         })
-
 
     }
 

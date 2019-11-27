@@ -4,7 +4,7 @@
     package="com.x.popularpeople">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.profiles.ProfilesActivity">
-
-        </activity>
-        <activity android:name=".ui.person_details.PersonDetailsActivity"></activity>
+        <activity android:name=".ui.search_people.SearchPeopleActivity"></activity>
+        <activity android:name=".ui.profiles.ProfilesActivity"></activity>
+        <activity android:name=".ui.person_details.PersonDetailsActivity" />
         <activity android:name=".ui.popular_people.PopularPeopleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

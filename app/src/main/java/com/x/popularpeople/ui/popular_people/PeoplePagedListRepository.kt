@@ -12,14 +12,28 @@ import com.x.popularpeople.repository.PeopleDataSource
 import com.x.popularpeople.repository.PeopleDataSourceFactory
 import io.reactivex.disposables.CompositeDisposable
 
-class PeoplePagedListRepository(private val apiService: TheMovieDBInterface) {
+class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,private val searchQuery: String) {
 
     lateinit var peoplePagedList: LiveData<PagedList<People>>
     lateinit var peopleDataSourceFactory: PeopleDataSourceFactory
 
     fun fetchLivePeoplePagedList(compositeDisposable: CompositeDisposable): LiveData<PagedList<People>> {
 
-        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable)
+        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable,searchQuery)
+
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setPageSize(POST_PER_PAGE)
+            .build()
+
+        peoplePagedList = LivePagedListBuilder(peopleDataSourceFactory, config).build()
+
+        return peoplePagedList
+    }
+
+    fun searchLivePeoplePagedList(compositeDisposable: CompositeDisposable): LiveData<PagedList<People>> {
+
+        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable, searchQuery)
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -34,6 +48,7 @@ class PeoplePagedListRepository(private val apiService: TheMovieDBInterface) {
     fun getNetworkState(): LiveData<NetworkState> {
         return Transformations.switchMap<PeopleDataSource, NetworkState>(
             peopleDataSourceFactory.peopleLiveDataSource,
-            PeopleDataSource::networkState)
+            PeopleDataSource::networkState
+        )
     }
 }

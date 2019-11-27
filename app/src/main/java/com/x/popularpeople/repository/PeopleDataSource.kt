@@ -12,7 +12,8 @@ import io.reactivex.schedulers.Schedulers
 
 class PeopleDataSource(
     private val apiService: TheMovieDBInterface,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
+    private val searchQuery: String
 ) : PageKeyedDataSource<Int, People>() {
 
     private var page = FIRST_PAGE
@@ -26,17 +27,30 @@ class PeopleDataSource(
     ) {
         networkState.postValue(NetworkState.LOADING)
 
-        compositeDisposable.add(
-            apiService.getPopularPeople(page)
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-                    callback.onResult(it.peopleList, null, page + 1)
-                    networkState.postValue(NetworkState.LOADED)
-                }, {
-                    networkState.postValue(NetworkState.ERROR)
-                    Log.e("PeopleDataSource", it.message)
-                })
-        )
+        if (searchQuery == "")
+            compositeDisposable.add(
+                apiService.getPopularPeople(page)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        callback.onResult(it.peopleList, null, page + 1)
+                        networkState.postValue(NetworkState.LOADED)
+                    }, {
+                        networkState.postValue(NetworkState.ERROR)
+                        Log.e("PeopleDataSource", it.message)
+                    })
+            )
+        else
+            compositeDisposable.add(
+                apiService.searchPopularPeople(page, searchQuery)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        callback.onResult(it.peopleList, null, page + 1)
+                        networkState.postValue(NetworkState.LOADED)
+                    }, {
+                        networkState.postValue(NetworkState.ERROR)
+                        Log.e("PeopleDataSource", it.message)
+                    })
+            )
 
     }
 
