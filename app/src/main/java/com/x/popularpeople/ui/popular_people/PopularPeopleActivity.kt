@@ -1,6 +1,7 @@
 package com.x.popularpeople.ui.popular_people
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -26,7 +27,8 @@ class PopularPeopleActivity : AppCompatActivity() {
 
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
 
-        peopleRepository = PeoplePagedListRepository(apiService,"robert")
+        peopleRepository = PeoplePagedListRepository(apiService, "kim")
+
 
         viewModel = getViewModel()
 
@@ -50,6 +52,11 @@ class PopularPeopleActivity : AppCompatActivity() {
             peopleAdapter.submitList(it)
         })
 
+//        viewModel.searchPeoplePagedList.observe(this, Observer {
+//            peopleAdapter.submitList(it)
+//            Log.e("searchlist",it.toString())
+//        })
+
         viewModel.networkState.observe(this, Observer {
             progress_bar_popular.visibility =
                 if (viewModel.listIsEmpty() && it == NetworkState.LOADING) View.VISIBLE else View.GONE
@@ -60,6 +67,12 @@ class PopularPeopleActivity : AppCompatActivity() {
                 peopleAdapter.setNetworkState(it)
             }
         })
+
+
+        butt.setOnClickListener {
+//            peopleRepository. = "robert"
+//viewModel.
+        }
 
     }
 

@@ -12,10 +12,13 @@ import com.x.popularpeople.repository.PeopleDataSource
 import com.x.popularpeople.repository.PeopleDataSourceFactory
 import io.reactivex.disposables.CompositeDisposable
 
-class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,private val searchQuery: String) {
+class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,private var searchQuery: String) {
 
     lateinit var peoplePagedList: LiveData<PagedList<People>>
+    lateinit var searchPeoplePagedList: LiveData<PagedList<People>>
     lateinit var peopleDataSourceFactory: PeopleDataSourceFactory
+
+
 
     fun fetchLivePeoplePagedList(compositeDisposable: CompositeDisposable): LiveData<PagedList<People>> {
 
@@ -40,7 +43,7 @@ class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,priv
             .setPageSize(POST_PER_PAGE)
             .build()
 
-        peoplePagedList = LivePagedListBuilder(peopleDataSourceFactory, config).build()
+        searchPeoplePagedList = LivePagedListBuilder(peopleDataSourceFactory, config).build()
 
         return peoplePagedList
     }
