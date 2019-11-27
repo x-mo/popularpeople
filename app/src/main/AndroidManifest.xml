@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.search_people.SearchPeopleActivity"></activity>
+        <activity android:name=".ui.search_people.SearchPeopleActivity">
+
+        </activity>
         <activity android:name=".ui.profiles.ProfilesActivity"></activity>
         <activity android:name=".ui.person_details.PersonDetailsActivity" />
         <activity android:name=".ui.popular_people.PopularPeopleActivity">

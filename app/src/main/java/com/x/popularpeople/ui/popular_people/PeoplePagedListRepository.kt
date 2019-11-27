@@ -12,17 +12,14 @@ import com.x.popularpeople.repository.PeopleDataSource
 import com.x.popularpeople.repository.PeopleDataSourceFactory
 import io.reactivex.disposables.CompositeDisposable
 
-class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,private var searchQuery: String) {
+class PeoplePagedListRepository(private val apiService: TheMovieDBInterface) {
 
     lateinit var peoplePagedList: LiveData<PagedList<People>>
-    lateinit var searchPeoplePagedList: LiveData<PagedList<People>>
     lateinit var peopleDataSourceFactory: PeopleDataSourceFactory
-
-
 
     fun fetchLivePeoplePagedList(compositeDisposable: CompositeDisposable): LiveData<PagedList<People>> {
 
-        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable,searchQuery)
+        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable,"")
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -34,16 +31,16 @@ class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,priv
         return peoplePagedList
     }
 
-    fun searchLivePeoplePagedList(compositeDisposable: CompositeDisposable): LiveData<PagedList<People>> {
+    fun searchLivePeoplePagedList(compositeDisposable: CompositeDisposable,query:String): LiveData<PagedList<People>> {
 
-        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable, searchQuery)
+        peopleDataSourceFactory = PeopleDataSourceFactory(apiService, compositeDisposable,query)
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setPageSize(POST_PER_PAGE)
             .build()
 
-        searchPeoplePagedList = LivePagedListBuilder(peopleDataSourceFactory, config).build()
+        peoplePagedList = LivePagedListBuilder(peopleDataSourceFactory, config).build()
 
         return peoplePagedList
     }
@@ -51,7 +48,6 @@ class PeoplePagedListRepository(private val apiService: TheMovieDBInterface,priv
     fun getNetworkState(): LiveData<NetworkState> {
         return Transformations.switchMap<PeopleDataSource, NetworkState>(
             peopleDataSourceFactory.peopleLiveDataSource,
-            PeopleDataSource::networkState
-        )
+            PeopleDataSource::networkState)
     }
 }

@@ -1,7 +1,7 @@
 package com.x.popularpeople.ui.popular_people
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,6 +13,7 @@ import com.x.popularpeople.R
 import com.x.popularpeople.api.TheMovieDBClient
 import com.x.popularpeople.api.TheMovieDBInterface
 import com.x.popularpeople.repository.NetworkState
+import com.x.popularpeople.ui.person_details.PersonDetailsActivity
 import kotlinx.android.synthetic.main.activity_popular_people.*
 
 class PopularPeopleActivity : AppCompatActivity() {
@@ -27,10 +28,13 @@ class PopularPeopleActivity : AppCompatActivity() {
 
         val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
 
-        peopleRepository = PeoplePagedListRepository(apiService, "kim")
+        peopleRepository = PeoplePagedListRepository(apiService)
 
-
-        viewModel = getViewModel()
+        var searchQuery =
+            if (intent.getStringExtra("query") == null) ""
+            else intent.getStringExtra("query")
+        
+        viewModel = getViewModel(searchQuery)
 
         val peopleAdapter = PopularPeoplePagedListAdapter(this)
 
@@ -52,11 +56,6 @@ class PopularPeopleActivity : AppCompatActivity() {
             peopleAdapter.submitList(it)
         })
 
-//        viewModel.searchPeoplePagedList.observe(this, Observer {
-//            peopleAdapter.submitList(it)
-//            Log.e("searchlist",it.toString())
-//        })
-
         viewModel.networkState.observe(this, Observer {
             progress_bar_popular.visibility =
                 if (viewModel.listIsEmpty() && it == NetworkState.LOADING) View.VISIBLE else View.GONE
@@ -68,18 +67,18 @@ class PopularPeopleActivity : AppCompatActivity() {
             }
         })
 
-
         butt.setOnClickListener {
-//            peopleRepository. = "robert"
-//viewModel.
+            val intent = Intent(this, PopularPeopleActivity::class.java)
+            intent.putExtra("query", "Sung")
+            startActivity(intent)
         }
 
     }
 
-    private fun getViewModel(): PopularPeopleViewModel {
+    private fun getViewModel(query: String): PopularPeopleViewModel {
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return PopularPeopleViewModel(peopleRepository) as T
+                return PopularPeopleViewModel(peopleRepository, query) as T
             }
         })[PopularPeopleViewModel::class.java]
     }

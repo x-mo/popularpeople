@@ -9,14 +9,14 @@ import io.reactivex.disposables.CompositeDisposable
 class PeopleDataSourceFactory(
     private val apiService: TheMovieDBInterface,
     private val compositeDisposable: CompositeDisposable,
-    private val searchQuery: String
+    private val query: String
 ) : DataSource.Factory<Int, People>() {
 
     val peopleLiveDataSource = MutableLiveData<PeopleDataSource>()
 
     override fun create(): DataSource<Int, People> {
 
-        val peopleDataSource = PeopleDataSource(apiService, compositeDisposable,searchQuery)
+        val peopleDataSource = PeopleDataSource(apiService, compositeDisposable,query)
         peopleLiveDataSource.postValue(peopleDataSource)
 
         return peopleDataSource

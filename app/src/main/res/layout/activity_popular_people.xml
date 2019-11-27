@@ -28,7 +28,7 @@
 
         <Button
             android:id="@+id/butt"
-            android:text="clear list"
+            android:text="butt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

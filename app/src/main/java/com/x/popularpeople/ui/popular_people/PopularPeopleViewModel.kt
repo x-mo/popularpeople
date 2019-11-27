@@ -8,13 +8,21 @@ import com.x.popularpeople.repository.NetworkState
 import com.x.popularpeople.ui.person_details.PersonDetailsRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class PopularPeopleViewModel(private val peopleRepository: PeoplePagedListRepository) :
+class PopularPeopleViewModel(
+    private val peopleRepository: PeoplePagedListRepository,
+    private val query: String
+) :
     ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
     val peoplePagedList: LiveData<PagedList<People>> by lazy {
-        peopleRepository.fetchLivePeoplePagedList(compositeDisposable)
+
+        if (query == "")
+            peopleRepository.fetchLivePeoplePagedList(compositeDisposable)
+        else
+            peopleRepository.searchLivePeoplePagedList(compositeDisposable,query)
+
     }
 
     val networkState: LiveData<NetworkState> by lazy {
